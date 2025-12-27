@@ -2,27 +2,33 @@
 This repository contains the datasets, preprocessing pipelines, model implementations, training scripts, and evaluation utilities for the paper:  TigSumm: A Cross-Lingual Framework for Sentiment-Aware Text Summarization in Low-Resource Tigrigna with Large Language Models, Accepted at Applied Intelligence (Springer Nature). 
 The goal of TigSumm is to enable sentiment-aware abstractive summarization for low-resource Tigrigna through cross-lingual transfer learning, affective modeling, and parameter-efficient fine-tuning of large language models.
 
+🧠 Overview of  the Model Architecture
 
-🔤 Preprocessing & Tokenizatio
+TigSumm is a scalable cross-lingual summarization framework that unifies multilingual pretrained backbones, sentiment-guided adaptation, and parameter-efficient fine-tuning to produce sentiment-aware summaries in low-resource Tigrigna. The approach exploits cross-lingual transfer from high-resource languages (English, Amharic) while preserving semantic fidelity and emotional coherence.
+
+Key features include:
+
+- Multilingual backbones (mBART-50, mT5, LLaMA-2)
+
+- Hybrid Sentiment Fusion Module (additive / gated / concatenation)
+
+- Low-Rank Adaptation (LoRA) for efficient fine-tuning
+
+- Balanced evaluation with ROUGE-L, BERTScore, SPR, and ECI
+
+- Fully reproducible training, evaluation, and analysis pipelines
+
+  
+🔤 Preprocessing & Tokenization
+
 python preprocessing/sentencepiece_train.py \
-  --input data/raw \
-  --vocab_size 32000 \
-  --model_prefix spm_tigsumm
+  -- input data/raw \
+  -- vocab_size 32000 \
+  -- model_prefix spm_tigsumm
 * Build multilingual dataset:
 python preprocessing/build_multilingual_dataset.py
 
 
-🧠  Model Architecture
-
-TigSumm integrates:
-
-Multilingual backbone: mBART-50, mT5, or LLaMA-2
-
-Sentiment prediction head
-
-Sentiment embedding fusion (additive / concat / gated)
-
-LoRA adaptation for parameter-efficient tuning
 
 ## Usage
 
