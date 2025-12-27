@@ -10,7 +10,9 @@ python preprocessing/sentencepiece_train.py \
   --model_prefix spm_tigsumm
 * Build multilingual dataset:
 python preprocessing/build_multilingual_dataset.py
-🧠 Model Architecture
+
+
+🧠  Model Architecture
 
 TigSumm integrates:
 
@@ -75,9 +77,15 @@ python test_tigsumm.py
 
 
 📚 Citation
-@article{Gebremeskel2025TigSumm,
+@article{Gebremeskel2026TigSumm,
   title={TigSumm: A Cross-Lingual Framework for Sentiment-Aware Text Summarization in Low-Resource Tigrigna with Large Language Models},
   author={ Hagos Gebremedhin Gebremeskel, et. al.},
-  journal={Knowledge-Based Systems},
-  year={2025}
+  journal={Applied Intelligence},
+  year={2026}
 }
+
+📬 Contact
+
+Hagos G. Gebremeskel
+Beijing Institute of Technology
+📧 hagosg81@bit.edu.cn
