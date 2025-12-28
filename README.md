@@ -25,9 +25,16 @@ python preprocessing/sentencepiece_train.py \
   -- input data/raw \
   -- vocab_size 32000 \
   -- model_prefix spm_tigsumm
-* Build multilingual dataset:
-python preprocessing/build_multilingual_dataset.py
-
+  
+  python preprocessing/build_multilingual_dataset.py
+  
+# Cross-Lingual Data Sources for Build Multilingual Dataset:
+The selected three cross-lingual high-resource languages(English, Amharic, and Arabic), chosen for typological or cultural proximity are availiable on the following:
+1.	https://github.com/ybai-nlp/MCLAS
+2.	https://github.com/google-deepmind/rc-data
+3.	https://github.com/Ethanscuter/gigaword 
+5.	https://github.com/IsraelAbebe/An-Amharic-News-Text-classification-Dataset
+   
 
 
 ## Usage
