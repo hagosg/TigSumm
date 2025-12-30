@@ -19,7 +19,7 @@ Key features include:
 - Fully reproducible training, evaluation, and analysis pipelines
 
   
-🔤 Preprocessing & Tokenization
+🔤 Data Preprocessing & Tokenization
 
 python preprocessing/sentencepiece_train.py \
   -- input data/raw \
@@ -28,7 +28,7 @@ python preprocessing/sentencepiece_train.py \
   
   python preprocessing/build_multilingual_dataset.py
   
-# Cross-Lingual Data Sources for Build Multilingual Dataset:
+## Cross-Lingual Data Sources for Build Multilingual Dataset:
 The selected three cross-lingual high-resource languages(English, Amharic, and Arabic), chosen for typological or cultural proximity are availiable on the following:
 1.	https://github.com/ybai-nlp/MCLAS
 2.	https://github.com/google-deepmind/rc-data
@@ -49,14 +49,13 @@ OR
 git clone https://github.com/yourusername/tigsumm.git
 cd tigsumm
 pip install -e .
-
-
+```
 
 🚀 Training
 
 python training/train_tigsumm.py \
-  --model llama2 \
-  --fusion gated \
+  --model TigSumm \
+  --fusion hybrid \
   --lora_rank 8 \
   --epochs 5
 
@@ -77,7 +76,7 @@ python test_tigsumm.py
 
 
 
-* Configuration
+### Configuration
 
 | Parameter   | Default                 | Description                                     |
 | ----------- | ----------------------- | ----------------------------------------------- |
@@ -99,6 +98,6 @@ python test_tigsumm.py
 
 📬 Contact
 
-Hagos G. Gebremeskel
+Hagos Gebremedhin Gebremeskel
 Beijing Institute of Technology
 📧 hagosg81@bit.edu.cn
