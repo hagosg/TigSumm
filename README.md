@@ -64,13 +64,13 @@ python training/train_tigsumm.py \
 📊 Evaluation
 
 
-ROUGE-L
+- ROUGE-L
 
-BERTScore
+- BERTScore
 
-Sentiment Preservation Rate (SPR)
+- Sentiment Preservation Rate (SPR)
 
-Emotional Consistency Index (ECI)
+- Emotional Consistency Index (ECI)
 
 python test_tigsumm.py
 
@@ -80,8 +80,8 @@ python test_tigsumm.py
 
 | Parameter   | Default                 | Description                                     |
 | ----------- | ----------------------- | ----------------------------------------------- |
-| model_name  | facebook/mbart-large-50 | Base model backbone                             |
-| fusion_type | add                     | Fusion of sentiment and encoder representations |
+| model_name  | TigSumm                 | Base model backbone                             |
+| fusion_type | Hybrid                  | Fusion of sentiment and encoder representations |
 | use_lora    | True                    | Enables PEFT-LoRA fine-tuning                   |
 | lr          | 3e-5                    | Learning rate                                   |
 | num_epochs  | 3                       | Training epochs                                 |
