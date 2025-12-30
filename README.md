@@ -98,7 +98,7 @@ python test_tigsumm.py
 
 @article{Gebremeskel2026TigSumm,
   title={TigSumm: A Cross-Lingual Framework for Sentiment-Aware Text Summarization in Low-Resource Tigrigna with Large Language Models},
-  author={ Hagos Gebremedhin Gebremeskel, et. al.},
+  author={ Hagos Gebremedhin Gebremeskel, Chong Feng, and et. al.},
   journal={Applied Intelligence},
   year={2026}
 }
