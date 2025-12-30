@@ -78,14 +78,20 @@ python test_tigsumm.py
 
 ### Configuration
 
-| Parameter   | Default                 | Description                                     |
-| ----------- | ----------------------- | ----------------------------------------------- |
-| model_name  | TigSumm                 | Base model backbone                             |
-| fusion_type | Hybrid                  | Fusion of sentiment and encoder representations |
-| use_lora    | True                    | Enables PEFT-LoRA fine-tuning                   |
-| lr          | 3e-5                    | Learning rate                                   |
-| num_epochs  | 3                       | Training epochs                                 |
 
+
+| Parameter | Value | Description |
+| :--- | :--- | :--- |
+| **Batch Size** | 16 | Effective after gradient accumulation |
+| **Learning Rate** | 2 × 10⁻⁵ | AdamW optimizer |
+| **Epochs** | 8 | Early stopping with patience 2 |
+| **Max Input Length** | 512 tokens | Summarization truncation |
+| **Sentiment Weight (β)** | 0.4 | Balancing polarity regularization |
+| **Fusion λ** | 0.7 | Encoder–sentiment tradeoff |
+| **Hardware** | 4 × A6000 GPUs | FP16 precision training |
+| **Training Time** | 5–14 h | Depending on model |
+
+*Note:* Configuration for TigSumm model training across different architectures. All experiments used linear learning rate warm-up over 10% of training steps.
 
 
 📚 Citation
