@@ -27,8 +27,20 @@ python preprocessing/sentencepiece_train.py \
   -- model_prefix spm_tigsumm
   
   python preprocessing/build_multilingual_dataset.py
+
+### Native Tigrigna Data 
+
+**Dataset Splits and Statistics**
+
+| Split | Documents | Summaries | Positive | Neutral | Negative |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Train** | 22,400 | 22,400 | 8,960 | 7,392 | 6,048 |
+| **Val** | 2,800 | 2,800 | 1,140 | 980 | 680 |
+| **Test** | 2,800 | 2,800 | 1,120 | 1,000 | 680 |
+
+*Note:* Distribution of documents across splits with sentiment labels. Training set represents 80% of the total dataset; validation and test sets each represent 10%.
   
-## Cross-Lingual Data Sources for Build Multilingual Dataset:
+### Cross-Lingual Data Sources for Build Multilingual Dataset
 The selected three cross-lingual high-resource languages(English, Amharic, and Arabic), chosen for typological or cultural proximity are availiable on the following:
 1.	https://github.com/ybai-nlp/MCLAS
 2.	https://github.com/google-deepmind/rc-data
