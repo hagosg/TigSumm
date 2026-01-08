@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-TigSumm: An Intelligent Cross-Lingual Framework for Sentiment-Aware Abstractive Text Summarization
+TigSumm: An Intelligent Cross-Lingual Framework for Sentiment-Aware Text Summarization in Low-Resource Tigrigna
 
 Author: Hagos et al. (2026)
 """
