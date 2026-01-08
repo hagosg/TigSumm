@@ -70,6 +70,23 @@ def main():
         model = AutoModelForSeq2SeqLM.from_pretrained(args.model_name_or_path)
     else:
         model = AutoModelForCausalLM.from_pretrained(args.model_name_or_path)
+print(f"Loading dataset from {args.dataset_path} ...")
+
+# Expecting TigSumm_Data.csv
+dataset = load_dataset(
+    "csv",
+    data_files=f"{args.dataset_path}/TigSumm_Data.csv"
+)
+
+# If a split column exists, use it
+if "split" in dataset["train"].column_names:
+    train_dataset = dataset["train"].filter(lambda x: x["split"] == "train")
+    test_dataset = dataset["train"].filter(lambda x: x["split"] == "test")
+else:
+    # Otherwise perform an automatic split
+    dataset = dataset["train"].train_test_split(test_size=0.2, seed=42)
+    train_dataset = dataset["train"]
+    test_dataset = dataset["test"]
 
     # LoRA adapter
     if args.use_lora:
