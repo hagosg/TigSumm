@@ -8,6 +8,10 @@ Author: Hagos et al. (2025)
 
 import argparse
 import torch
+import torch.nn as nn
+from transformers import Trainer
+import torch.nn.functional as F
+
 from datasets import load_dataset
 from transformers import (
     AutoTokenizer,
@@ -191,6 +195,88 @@ def main():
     tokenizer.save_pretrained(args.TigSumm/output)
 
     print(f"Training complete. Model saved to {args.TigSumm/output}")
+
+'''
+ Sentiment-Aware Seq2Seq Wrapper
+ We introduce a multi-task learning formulation that jointly optimizes abstractive summarization 
+ and sentiment classification, improving emotional fidelity without sacrificing semantic accuracy.
+'''
+class TigSummMultiTaskModel(nn.Module):
+    def __init__(self, base_model, hidden_size, num_labels=3):
+        super().__init__()
+        self.base_model = base_model
+        self.sentiment_head = nn.Linear(hidden_size, num_labels)
+
+    def forward(
+        self,
+        input_ids,
+        attention_mask=None,
+        labels=None,
+        sentiment_labels=None,
+    ):
+        outputs = self.base_model(
+            input_ids=input_ids,
+            attention_mask=attention_mask,
+            labels=labels,
+            output_hidden_states=True,
+            return_dict=True,
+        )
+
+        # Encoder CLS-style pooling
+        encoder_hidden = outputs.encoder_last_hidden_state
+        pooled = encoder_hidden.mean(dim=1)
+
+        sentiment_logits = self.sentiment_head(pooled)
+
+        return {
+            "loss": outputs.loss,
+            "logits": outputs.logits,
+            "sentiment_logits": sentiment_logits,
+        }
+  '''
+# Custom Trainer with Joint Loss
+'''
+
+class TigSummTrainer(Trainer):
+    def compute_loss(self, model, inputs, return_outputs=False):
+        labels = inputs.pop("labels")
+        sentiment_labels = inputs.pop("sentiment")
+
+        outputs = model(**inputs, labels=labels)
+
+        summarization_loss = outputs["loss"]
+        sentiment_loss = F.cross_entropy(
+            outputs["sentiment_logits"],
+            sentiment_labels,
+        )
+
+        lambda_sent = 0.3
+        total_loss = summarization_loss + lambda_sent * sentiment_loss
+
+        return (total_loss, outputs) if return_outputs else total_loss
+
+ # Preprocessing Update (Minimal)
+
+def preprocess(batch):
+    model_inputs = tokenizer(
+        batch["text"],
+        max_length=512,
+        truncation=True,
+        padding="max_length",
+    )
+
+    with tokenizer.as_target_tokenizer():
+        labels = tokenizer(
+            batch["summary"],
+            max_length=128,
+            truncation=True,
+            padding="max_length",
+        )
+
+    model_inputs["labels"] = labels["input_ids"]
+    model_inputs["sentiment"] = batch["sentiment"]
+
+    return model_inputs
 
 
 if __name__ == "__main__":
